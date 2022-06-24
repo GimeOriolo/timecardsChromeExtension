@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Time Cards</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    <div class="container">
+        <form id="form" action="/">
+            <h1>My Time Cards</h1>            
+            <div class="newValue">
+                <label>New value?</label>  
+                <select id="value">                    
+                    <option value="no">No</option>
+                    <option value="yes">Yes</option>
+                  </select>
+            </div>            
+            <div class="input-control">
+                <label for="projectCode">Project Code</label>
+                <input id="projectCode" name="projectCode" type="text">
+                <div class="error"></div>
+            </div>
+            <div class="input-control">
+                <label for="taskDetails">Task Details</label>
+                <input id="taskDetails" name="taskDetails" type="text">
+                <div class="error"></div>
+            </div>
+            <div class="input-control">
+                <label for="timeType">Time Type</label>
+                <input id="timeType"name="timeType" type="text">
+                <div class="error"></div>
+            </div>
+            <div class="input-control">
+                <label for="location">Location</label>
+                <input id="location"name="location" type="text">
+                <div class="error"></div>
+            </div>
+            <div class="input-control">
+                <label for="country">Relocated Country</label>
+                <input id="country"name="country" type="text">
+                <div class="error"></div>
+            </div>
+            <div class="input-control">
+                <label for="dateStart">Start Date</label>
+                <input id="dateStart"name="dateStart" type="date">
+                <div class="error"></div>
+            </div>
+            <div class="input-control">
+                <label for="dateEnd">End Date</label>
+                <input id="dateEnd"name="dateEnd" type="date">
+                <div class="error"></div>
+            </div>
+            <div class="input-control">
+                <label for="startTime">Start Time</label>
+                <input id="startTime"name="startTime" type="text" value placeholder="9:00 AM">
+                <div class="error"></div>
+            </div>
+            <div class="input-control">
+                <label for="endTime">End Time</label>
+                <input id="endTime"name="endTime" type="text" value placeholder="6:00 PM">
+                <div class="error"></div>
+            </div>
+            <div class="input-control">
+                <label for="quantity">Quantity</label>
+                <input id="quantity"name="quantity" type="text">
+                <div class="error"></div>
+            </div>
+            <button id="myButton" type="submit">Add Time</button>
+        </form>
+    </div>    
+    <script src="popup.js"></script> 
+    <script src="error.js"></script> 
+    <script src="timecards.js"></script> 
+</body>
+</html>

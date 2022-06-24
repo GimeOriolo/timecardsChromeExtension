@@ -1,0 +1,20 @@
+{
+    "manifest_version": 3,
+    "name": "My Time Cards",
+    "version": "1.0",
+    "description": "Add a new time card.",
+    "icons": {
+        "128": "iconClock.png",
+        "48": "iconClock.png",
+        "16": "iconClock.png"
+    },
+    "action": {
+        "default_icon": "iconClock.png",
+        "default_popup": "popup.html"
+    },
+
+    "permissions": [
+        "storage",
+        "tabs"
+    ]
+}
