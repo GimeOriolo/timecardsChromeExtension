@@ -36,9 +36,7 @@ function getDataEntries(){
         timeValues.quantity= document.getElementById("quantity").value.trim();    
 
         if(!mandatoryFields(timeValues)){
-        //    for (let index = 0; index < Object.keys(timeValues).length; index++) {
-        //            localStorage.setItem(Object.keys(timeValues)[index],Object.values(timeValues)[index]);               
-        //         };
+       
                 localStorage.setItem("timeValues", JSON.stringify(timeValues));
                 alert("your time card has added"); 
 
@@ -55,7 +53,7 @@ function getDataEntries(){
             navigateToOracle();
           }
           else{
-            alert("No hay datos para completar, por favor agrega los valores cambiando NO por YES en New value");
+            alert("The project code is empty, please complete your Project Data switching NO option to YES in New value? field");
           }
     }   
 };
