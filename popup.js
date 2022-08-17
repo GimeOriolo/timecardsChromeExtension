@@ -45,6 +45,9 @@ function getDataEntries() {
             alert("complete mandatory fields");
         }
     }
+    else if(document.getElementById("value").value == 'copy'){
+        navigateToOracle(true);
+    }
     else {
         if (chrome.storage.sync.get('times')) {            
             navigateToOracle();
