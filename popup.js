@@ -46,7 +46,7 @@ function getDataEntries() {
         }
     }
     else if(document.getElementById("value").value == 'copy'){
-        navigateToOracle(true);
+        navigateToOracle();
     }
     else {
         if (chrome.storage.sync.get('times')) {            
