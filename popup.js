@@ -37,23 +37,24 @@ function getDataEntries() {
 
         if (!mandatoryFields(timeValues)) {
             chrome.storage.sync.set({ 'times': JSON.stringify(timeValues) }, function () {
-                alert("your time card has added");
+                alert("Your time card has added");
+                forDisplayStyle("input-control", "none");
             });
             navigateToOracle();
         }
         else {
-            alert("complete mandatory fields");
+            alert("Complete mandatory fields");
         }
     }
     else if(document.getElementById("value").value == 'copy'){
-        navigateToOracle();
+        navigateToOracle(true);
     }
     else {
         if (chrome.storage.sync.get('times')) {            
             navigateToOracle();
         }
         else {
-            alert("The project code is empty, please complete your Project Data switching NO option to YES in New value? field");
+            alert("The project code is empty, please complete your Project Data switching Copy option to YES in New value? field");
         }
     }
 };
