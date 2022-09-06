@@ -43,18 +43,26 @@ chrome.runtime.sendMessage("navigating", (response) => {
                     await clickAdd();
                     const authorizationAdd = await clickAdd();
                     if (authorizationAdd) {
-                        await completeTimeCard();
-                        await inputQuantity();
-                        await clickDatePicker();
-                        const authorizationDate = await getDates();
-                        if (authorizationDate) {
-                            await clickClose();
-                            await clickOK();
-                           // await clickOnSaveAndClose();
-                           // closePopUp();
+                        await inputField("projectCode", "span[aria-label='Project Code'] input");
+                        await inputField("taskDetails", "span[aria-label='Task Details'] input");
+                        await inputField("timeType", "span[aria-label='Time Type'] input");
+                        await inputField("location", "span[aria-label='Location'] input");
+                        const authorizationCountry = await inputField("country", "span[aria-label='Relocated Country'] input");
+                        if (authorizationCountry) {
+                            await inputField("startTime", "input[placeholder='Start Time']");                          
+                            await inputField("endTime", "input[placeholder='End Time']");  
+                            await inputQuantity();
+                            await clickDatePicker();
+                            const authorizationDate = await getDates();
+                            if (authorizationDate) {
+                                await clickClose();
+                                await clickOK();
+                                await clickOnSaveAndClose();
+                                closePopUp();
+                            }
                         }
-                    }
 
+                    }
                 };
                 addCards();
             }
@@ -126,32 +134,35 @@ function clickOnSaveAndClose() {
     });
 };
 
-function completeTimeCard() {
+function inputField(valueField, elementField) {
     return new Promise((resolve, reject) => {
         setTimeout(() => {
             chrome.storage.sync.get('times', function (data) {
                 const values = JSON.parse(data.times);
-                document.querySelector("span[aria-label='Project Code'] input").value = values.projectCode;
-                console.log("Input Project Code " + values.projectCode);
-                document.querySelector("span[aria-label='Task Details'] input").value = values.taskDetails;
-                console.log("Input Project Code " + values.taskDetails);
-                document.querySelector("span[aria-label='Time Type'] input").value = values.timeType;
-                console.log("Input Project Code " + values.timeType);
-                document.querySelector("span[aria-label='Location'] input").value = values.location;
-                console.log("Input Project Code " + values.location);
-                document.querySelector("span[aria-label='Relocated Country'] input").value = values.country;
-                console.log("Input Project Code " + values.country);
-                document.querySelector("img[title='Select dates']").click();
-                console.log("Input Dates");
-                document.querySelector("input[placeholder='Start Time']").value = values.startTime;
-                console.log("Start Time " + values.startTime);
-                document.querySelector("input[placeholder='End Time']").value = values.endTime;
-                console.log("End Time " + values.endTime);              
-                resolve();
+                if (valueField.endsWith("Time")) {
+                    document.querySelector(elementField).value = values[valueField];
+                    console.log("input " + values[valueField]);
+                    resolve();
+                }
+                else {
+                    document.querySelector(elementField).value = values[valueField];
+                    document.querySelector(elementField).click();
+                    setTimeout(() => {
+                        document.querySelectorAll("div[id*='suggestions-popup'] tr").forEach((element) => {
+                            if (element.innerText.trim() == values[valueField]) {
+                                element.click();
+                                console.log("input " + values[valueField]);
+                                return;
+                            }
+                        });
+                        resolve(true);
+                    }, clicksDelay);
+
+                }            
             });
         }, clicksDelay);
     });
-};
+}
 
 function inputQuantity() {
     return new Promise((resolve, reject) => {
@@ -203,7 +214,7 @@ function clickOK() {
 function getDates() {
     return new Promise((resolve, reject) => {
         const month = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-        const d = new Date().addDays(5);
+        const d = new Date();
         let name = month[d.getMonth()];
         let year = d.getUTCFullYear();
         let daysOfWeek = new Array(5);
@@ -224,7 +235,7 @@ function getDates() {
                 });
             });
             resolve(true);
-        }, clicksDelay);       
+        }, clicksDelay);
     });
 };
 
