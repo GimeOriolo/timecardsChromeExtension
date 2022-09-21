@@ -46,12 +46,12 @@ function getDataEntries() {
             alert("Complete mandatory fields");
         }
     }
-    else if(document.getElementById("value").value == 'copy'){
-        navigateToOracle(true);
-    }
+    // else if(document.getElementById("value").value == 'copy'){
+    //     navigateToOracle(true);
+    // }
     else {
         if (chrome.storage.sync.get('times')) {            
-            navigateToOracle();
+            navigateToOracle(true);
         }
         else {
             alert("The project code is empty, please complete your Project Data switching Copy option to YES in New value? field");
